@@ -1,0 +1,6 @@
+PyQt6
+scapy
+python-nmap
+fpdf
+requests
+pyinstaller

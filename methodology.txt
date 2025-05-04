@@ -1,0 +1,33 @@
+Install Dependencies on the New System
+Once you transfer the project folder to the system, open Command Prompt inside the folder and run:
+
+pip install -r requirements.txt
+
+This will install all required packages.
+
+
+
+Verify Installation
+After installation, confirm that all required libraries are installed:
+
+python -c "import PyQt6, scapy.all, nmap, fpdf, requests; print('All dependencies installed successfully!')"
+
+
+If there’s no error, your environment is ready.
+
+
+
+Run the Scanner GUI
+Start the scanner by executing:
+
+
+python anvs_gui.py
+If running the script works as expected, you're all set!
+
+
+Convert to EXE (Optional)
+If you need a standalone EXE, use:
+
+pyinstaller --onefile --windowed --icon=icon.ico --name ANVS anvs_gui.py
+
+Your EXE will be in the dist/ folder.
