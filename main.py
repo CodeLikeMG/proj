@@ -7,7 +7,7 @@ from cve_lookup import get_cve_data_mitre
 from generate_report import generate_report
 
 def run_cli_scan():
-    from network_scan import perform_scan
+    from network_scan import scan_network
     from service_analysis import analyze_services
     from cve_lookup import lookup_cves
     from generate_report import generate_pdf_report
