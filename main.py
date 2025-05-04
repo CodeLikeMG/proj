@@ -1,3 +1,4 @@
+import argparse
 import pandas as pd 
 from network_scan import scan_network
 from service_analysis import analyze_network
@@ -5,7 +6,33 @@ from cve_lookup import get_cve_data_mitre
 #from cve_lookup import get_cve_data
 from generate_report import generate_report
 
+def run_cli_scan():
+    from network_scan import perform_scan
+    from service_analysis import analyze_services
+    from cve_lookup import lookup_cves
+    from generate_report import generate_pdf_report
+
+    target = "127.0.0.1"  # or dynamically parse from repo config
+    print(f"[+] Starting scan on {target}")
+
+    scan_result = perform_scan(target)
+    service_info = analyze_services(scan_result)
+    cve_results = lookup_cves(service_info)
+    generate_pdf_report(target, scan_result, service_info, cve_results)
+
+    print("[+] Scan complete. Report generated.")
+
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--ci', action='store_true', help="Run in CLI mode for CI/CD")
+    args = parser.parse_args()
+
+    if args.ci:
+        run_cli_scan()
+    else:
+        from anvs_gui import launch_gui
+        launch_gui()
     print("🚀 Starting Automated Network Vulnerability Scanner...")
 
     # Step 1: Perform Network Scan (One-time execution, Fast Mode Enabled)
